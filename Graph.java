@@ -20,7 +20,7 @@ public class Graph {
         while (!queue.isEmpty()) {
             {
                 int removed = queue.remove();
-                System.out.println(removed + " ");
+                System.out.print(removed + " ");
                 for (int i = 0; i < V; i++) {
                     if (graph[removed][i] == 1 && !visited[i]) {
                         queue.add(i);
@@ -34,6 +34,23 @@ public class Graph {
 
     }
 
+    public void dfs(int start) {
+        boolean[] visited = new boolean[V];
+        Arrays.fill(visited, false);
+        dfsutill(start, visited);
+
+    }
+
+    public void dfsutill(int start, boolean[] visited) {
+        System.out.print(start + " ");
+        visited[start] = true;
+        for (int i = 0; i < V; i++) {
+            if (graph[start][i] == 1 && !visited[i]) {
+                dfsutill(i, visited);
+            }
+        }
+    }
+
     public static void main(String[] args) {
         Graph graph = new Graph(6);
         graph.graph = new int[][] {
@@ -44,6 +61,33 @@ public class Graph {
                 { 0, 0, 0, 1, 0, 1 },
                 { 0, 0, 1, 0, 1, 0 }
         };
+        System.out.println("Bfs");
+        System.out.println();
+        graph.bfs(0);
+        System.out.println();
+        graph.bfs(1);
+        System.out.println();
+        graph.bfs(2);
+        System.out.println();
+        graph.bfs(3);
+        System.out.println();
+        graph.bfs(4);
+        System.out.println();
+        graph.bfs(5);
+        System.out.println();
+        System.out.println("Dfs");
+        System.out.println();
+        graph.dfs(0);
+        System.out.println();
+        graph.dfs(1);
+        System.out.println();
+        graph.dfs(2);
+        System.out.println();
+        graph.dfs(3);
+        System.out.println();
+        graph.dfs(4);
+        System.out.println();
+        graph.dfs(5);
     }
 
 }
