@@ -103,6 +103,11 @@ public class SegmentTree {
         System.out.println("Sum b/w range 2,6");
         System.out.println(segmentTree.rangeQuery(2, 6));
 
+        System.out.println("Updating index 5 with value -15");
+        segmentTree.update(5, -15);
+        segmentTree.display();
+        System.out.println("Sum b/w range 2,6 after update");
+        System.out.println(segmentTree.rangeQuery(2, 6));
     }
 
 }
