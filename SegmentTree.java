@@ -34,6 +34,21 @@ public class SegmentTree {
         return node;
     }
 
+    public int rangeQuery(int sIdx, int eIdx) {
+        return rangeQuery(root, sIdx, eIdx);
+    }
+
+    private int rangeQuery(Node root, int sIdx, int eIdx) {
+        if (root.startInterval > sIdx || root.endInterval < eIdx) {
+            return 0;
+        } else if (root.startInterval >= sIdx && root.endInterval <= eIdx)
+            return root.data;
+        int leftSum = rangeQuery(root.left, sIdx, eIdx);
+        int rightSum = rangeQuery(root.right, sIdx, eIdx);
+        return leftSum + rightSum;
+
+    }
+
     public void display() {
         display(root);
     }
