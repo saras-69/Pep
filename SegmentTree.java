@@ -34,6 +34,23 @@ public class SegmentTree {
         return node;
     }
 
+    public void display() {
+        display(root);
+    }
+
+    public void display(Node root) {
+        if (root == null)
+            return;
+        String str = "";
+        str = str + "Interval [" + root.startInterval + "-" + root.endInterval + "] | Data " + root.data;
+        System.out.println(str);
+        str += "\n";
+        if (root.left != null)
+            display(root.left);
+        if (root.right != null)
+            display(root.right);
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int N = sc.nextInt();
@@ -41,6 +58,8 @@ public class SegmentTree {
         for (int i = 0; i < N; i++)
             arr[i] = sc.nextInt();
         SegmentTree segmentTree = new SegmentTree(arr);
+        segmentTree.display();
+
     }
 
 }
