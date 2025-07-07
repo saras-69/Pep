@@ -34,19 +34,45 @@ public class SegmentTree {
         return node;
     }
 
+    // T(N)=O(Log N)
     public int rangeQuery(int sIdx, int eIdx) {
         return rangeQuery(root, sIdx, eIdx);
     }
 
     private int rangeQuery(Node root, int sIdx, int eIdx) {
-        if (root.startInterval > sIdx || root.endInterval < eIdx) {
+        if (root.startInterval > eIdx || root.endInterval < sIdx) {
             return 0;
-        } else if (root.startInterval >= sIdx && root.endInterval <= eIdx)
-            return root.data;
-        int leftSum = rangeQuery(root.left, sIdx, eIdx);
-        int rightSum = rangeQuery(root.right, sIdx, eIdx);
-        return leftSum + rightSum;
+        }
 
+        if (root.startInterval >= sIdx && root.endInterval <= eIdx) {
+            return root.data;
+        }
+
+        int leftAns = rangeQuery(root.left, sIdx, eIdx);
+        int rightAns = rangeQuery(root.right, sIdx, eIdx);
+
+        return leftAns + rightAns;
+    }
+
+    public int update(int idx, int elt) {
+        return update(root, idx, elt);
+    }
+
+    private int update(Node node, int idx, int elt) {
+        if (idx >= node.startInterval || idx <= node.endInterval) {
+            return node.data;
+        }
+
+        if (node.startInterval == node.endInterval && node.startInterval == idx) {
+            node.data = elt;
+            return node.data;
+        }
+
+        int leftAns = update(node.left, idx, elt);
+        int rightAns = update(node.right, idx, elt);
+
+        node.data = leftAns + rightAns;
+        return node.data;
     }
 
     public void display() {
