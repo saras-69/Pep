@@ -10,7 +10,7 @@ public class FenwickTree {
     }
 
     public void update(int idx, int elt) {
-        while (idx <= 0) {
+        while (idx <= N) {
             bits[idx] += elt;
             idx += idx & -idx;
         }
